@@ -3,7 +3,7 @@ Version 1 generada por Marc Serrano
 
 Version 1 verificada por Arnau Millan
 
-version 1 comunicada por Bryan García
+Version 1 comunicada por Bryan García
 
 
 URL: https://youtu.be/baDgPLZTE2Q
