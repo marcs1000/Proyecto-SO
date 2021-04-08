@@ -1,0 +1,42 @@
+[33mcommit 4e933807adf7cd1bb34017f77da8d7d13aae50b4[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Bunker14 <cibertatanka@gmail.com>
+Date:   Wed Apr 7 19:36:51 2021 +0200
+
+    Update README.md
+
+[33mcommit 57686a22d02c8c525f47afcd03329ab874d20ea9[m
+Merge: 580965d 0914607
+Author: Bunker14 <cibertatanka@gmail.com>
+Date:   Wed Apr 7 19:34:31 2021 +0200
+
+    Version 1 verificada por Arnau Millan
+
+[33mcommit 0914607793613ae7d98edde39abaab364aa2c5e6[m[33m ([m[1;33mtag: V1[m[33m)[m
+Author: Bunker14 <cibertatanka@gmail.com>
+Date:   Wed Apr 7 19:21:48 2021 +0200
+
+    Version 1 verificada por Arnau Millan
+
+[33mcommit 58edc644671538bcd8e7c79b0abc04be9d2e0637[m[33m ([m[1;31morigin/dev-v1[m[33m)[m
+Author: Marc Serrano <marc.serrano.de.la.cruz@estudiantat.upc.edu>
+Date:   Wed Apr 7 12:31:15 2021 +0200
+
+    Versión 1 generada por Marc Serrano
+
+[33mcommit 7bbec6de38c1b34e8d3aa8ea3e41ef24e3971245[m
+Author: Marc Serrano <marc.serrano.de.la.cruz@estudiantat.upc.edu>
+Date:   Wed Apr 7 12:27:41 2021 +0200
+
+    Versión 1 generada por Marc Serrano
+
+[33mcommit 95a5de9193333f3b6c549edbc30f94201647b0a3[m
+Author: Marc Serrano <marc.serrano.de.la.cruz@estudiantat.upc.edu>
+Date:   Wed Apr 7 12:17:32 2021 +0200
+
+    Versión 1 generada por Marc Serrano
+
+[33mcommit 580965dedcee3b02ee60c14204f4ff5e7a3c52f4[m
+Author: Marc Serrano <80599133+marcs1000@users.noreply.github.com>
+Date:   Wed Apr 7 12:06:19 2021 +0200
+
+    Initial commit
