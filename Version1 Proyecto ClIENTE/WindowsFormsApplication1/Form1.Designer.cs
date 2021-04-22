@@ -48,9 +48,17 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.Conectar = new System.Windows.Forms.MenuStrip();
+            this.conectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desconectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Actualizar = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.Juego.SuspendLayout();
             this.Registro.SuspendLayout();
+            this.Conectar.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -122,7 +130,7 @@
             this.Juego.Controls.Add(this.consultas);
             this.Juego.Location = new System.Drawing.Point(407, 45);
             this.Juego.Name = "Juego";
-            this.Juego.Size = new System.Drawing.Size(551, 509);
+            this.Juego.Size = new System.Drawing.Size(281, 213);
             this.Juego.TabIndex = 7;
             this.Juego.TabStop = false;
             this.Juego.Text = "Consultas";
@@ -165,7 +173,7 @@
             // 
             // consultas
             // 
-            this.consultas.Location = new System.Drawing.Point(54, 370);
+            this.consultas.Location = new System.Drawing.Point(54, 174);
             this.consultas.Name = "consultas";
             this.consultas.Size = new System.Drawing.Size(75, 23);
             this.consultas.TabIndex = 0;
@@ -183,7 +191,7 @@
             this.Registro.Controls.Add(this.label5);
             this.Registro.Controls.Add(this.label4);
             this.Registro.Controls.Add(this.label1);
-            this.Registro.Location = new System.Drawing.Point(23, 247);
+            this.Registro.Location = new System.Drawing.Point(23, 246);
             this.Registro.Name = "Registro";
             this.Registro.Size = new System.Drawing.Size(333, 278);
             this.Registro.TabIndex = 8;
@@ -251,14 +259,72 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Usuario";
             // 
+            // Conectar
+            // 
+            this.Conectar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.conectarToolStripMenuItem,
+            this.desconectarToolStripMenuItem});
+            this.Conectar.Location = new System.Drawing.Point(0, 0);
+            this.Conectar.Name = "Conectar";
+            this.Conectar.Size = new System.Drawing.Size(987, 24);
+            this.Conectar.TabIndex = 9;
+            this.Conectar.Text = "Conectar";
+            // 
+            // conectarToolStripMenuItem
+            // 
+            this.conectarToolStripMenuItem.Name = "conectarToolStripMenuItem";
+            this.conectarToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.conectarToolStripMenuItem.Text = "Conectar";
+            this.conectarToolStripMenuItem.Click += new System.EventHandler(this.conectarToolStripMenuItem_Click);
+            // 
+            // desconectarToolStripMenuItem
+            // 
+            this.desconectarToolStripMenuItem.Name = "desconectarToolStripMenuItem";
+            this.desconectarToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.desconectarToolStripMenuItem.Text = "Desconectar";
+            this.desconectarToolStripMenuItem.Click += new System.EventHandler(this.desconectarToolStripMenuItem_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.groupBox2.Controls.Add(this.listBox1);
+            this.groupBox2.Controls.Add(this.Actualizar);
+            this.groupBox2.Location = new System.Drawing.Point(407, 294);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(525, 230);
+            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Lista de Conectados";
+            // 
+            // Actualizar
+            // 
+            this.Actualizar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Actualizar.Location = new System.Drawing.Point(15, 186);
+            this.Actualizar.Name = "Actualizar";
+            this.Actualizar.Size = new System.Drawing.Size(114, 29);
+            this.Actualizar.TabIndex = 1;
+            this.Actualizar.Text = "Actualizar";
+            this.Actualizar.UseVisualStyleBackColor = true;
+            this.Actualizar.Click += new System.EventHandler(this.Actualizar_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(15, 19);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(485, 160);
+            this.listBox1.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 579);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Registro);
             this.Controls.Add(this.Juego);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.Conectar);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -268,7 +334,11 @@
             this.Juego.PerformLayout();
             this.Registro.ResumeLayout(false);
             this.Registro.PerformLayout();
+            this.Conectar.ResumeLayout(false);
+            this.Conectar.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -294,6 +364,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Registrarse;
+        private System.Windows.Forms.MenuStrip Conectar;
+        private System.Windows.Forms.ToolStripMenuItem conectarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desconectarToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button Actualizar;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
