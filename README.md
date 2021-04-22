@@ -9,3 +9,4 @@ URL: https://youtu.be/baDgPLZTE2Q
 
 
 Version 2 generada por Arnau Millan  
+Versión 2 verificada por Marc Serrano
