@@ -173,13 +173,5 @@ namespace WindowsFormsApplication1
             server.Shutdown(SocketShutdown.Both);
             server.Close();
         }
-
-        private void Actualizar_Click(object sender, EventArgs e)
-        {
-            string mensaje = "6/";
-            // Enviamos al servidor el nombre tecleado
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-            server.Send(msg);
-        }
     }
 }
