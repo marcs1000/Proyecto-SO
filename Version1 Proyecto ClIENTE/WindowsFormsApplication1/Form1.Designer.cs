@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.usuario = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -52,13 +53,23 @@
             this.conectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desconectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+<<<<<<< HEAD
             this.Actualizar = new System.Windows.Forms.Button();
+=======
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+>>>>>>> dev-v3
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.Juego.SuspendLayout();
             this.Registro.SuspendLayout();
             this.Conectar.SuspendLayout();
             this.groupBox2.SuspendLayout();
+<<<<<<< HEAD
+=======
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
+>>>>>>> dev-v3
             this.SuspendLayout();
             // 
             // label2
@@ -287,8 +298,12 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+<<<<<<< HEAD
             this.groupBox2.Controls.Add(this.listBox1);
             this.groupBox2.Controls.Add(this.Actualizar);
+=======
+            this.groupBox2.Controls.Add(this.dataGridView1);
+>>>>>>> dev-v3
             this.groupBox2.Location = new System.Drawing.Point(407, 294);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(525, 230);
@@ -296,6 +311,7 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de Conectados";
             // 
+<<<<<<< HEAD
             // Actualizar
             // 
             this.Actualizar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -306,20 +322,45 @@
             this.Actualizar.Text = "Actualizar";
             this.Actualizar.UseVisualStyleBackColor = true;
             this.Actualizar.Click += new System.EventHandler(this.Actualizar_Click);
+=======
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(15, 19);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(489, 195);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // form1BindingSource
+            // 
+            this.form1BindingSource.DataSource = typeof(WindowsFormsApplication1.Form1);
+>>>>>>> dev-v3
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
+<<<<<<< HEAD
             this.listBox1.Location = new System.Drawing.Point(15, 19);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(485, 160);
             this.listBox1.TabIndex = 2;
+=======
+            this.listBox1.Location = new System.Drawing.Point(759, 94);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(152, 134);
+            this.listBox1.TabIndex = 10;
+>>>>>>> dev-v3
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 579);
+<<<<<<< HEAD
+=======
+            this.Controls.Add(this.listBox1);
+>>>>>>> dev-v3
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Registro);
             this.Controls.Add(this.Juego);
@@ -337,6 +378,11 @@
             this.Conectar.ResumeLayout(false);
             this.Conectar.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+<<<<<<< HEAD
+=======
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
+>>>>>>> dev-v3
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,7 +414,12 @@
         private System.Windows.Forms.ToolStripMenuItem conectarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem desconectarToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox2;
+<<<<<<< HEAD
         private System.Windows.Forms.Button Actualizar;
+=======
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource form1BindingSource;
+>>>>>>> dev-v3
         private System.Windows.Forms.ListBox listBox1;
     }
 }
