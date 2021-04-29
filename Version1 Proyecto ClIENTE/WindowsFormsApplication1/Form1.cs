@@ -8,26 +8,82 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+
+        delegate void DelegadoParaGrid(string[] mensaje, int codigo);
+
+
         Socket server;
+        Thread atender;
         public Form1()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
            
         }
+
+
+        private void AtenderServidor ()
+        {
+            while (true)
+            {
+                byte[] msg2 = new byte[200];
+                server.Receive(msg2);
+                string[] trozos = Encoding.ASCII.GetString(msg2).Split('/');
+                int codigo = Convert.ToInt32(trozos[0]);
+                string mensaje = trozos[1].Split('\0')[0];
+
+
+                switch (codigo)
+                {
+                    case 1:
+                         MessageBox.Show(mensaje);
+                        break;
+
+                    case 2:
+                        MessageBox.Show(mensaje);
+                        break;
+
+                    case 4:
+                        MessageBox.Show(mensaje);
+                        break;
+
+                    case 5:
+                        MessageBox.Show(mensaje);
+                        break;
+
+                    case 999:
+                        int numcon999 = Convert.ToInt32(mensaje);
+                        dataGridView1.RowCount = numcon999;
+                        dataGridView1.ColumnCount = 1;
+                        for (int h = 2; h < trozos.Length;) // añadimos a los usuarios al datagridview
+                        {
+                            dataGridView1.Rows[h - 2].Cells[0].Value = trozos[h];
+                            h++;
+                        }
+                        break;
+                }
+
+
+            }
+
+        }
+
         private void Form1_Close(object sender, EventArgs e)
         {
             
 
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -35,12 +91,6 @@ namespace WindowsFormsApplication1
             // Enviamos al servidor el nombre tecleado
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
-
-            //Recibimos la respuesta del servidor
-            byte[] msg2 = new byte[80];
-            server.Receive(msg2);
-            mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-            MessageBox.Show(mensaje);
         }
 
         private void consultas_Click(object sender, EventArgs e)
@@ -51,12 +101,6 @@ namespace WindowsFormsApplication1
                 // Enviamos al servidor el nombre tecleado
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
-
-                //Recibimos la respuesta del servidor
-                byte[] msg2 = new byte[80];
-                server.Receive(msg2);
-                mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show(mensaje);
             }
             else if (puntos.Checked)
             {
@@ -64,12 +108,6 @@ namespace WindowsFormsApplication1
                 // Enviamos al servidor el nombre tecleado
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
-
-                //Recibimos la respuesta del servidor
-                byte[] msg2 = new byte[80];
-                server.Receive(msg2);
-                mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show(mensaje);
             }
         }
 
@@ -84,20 +122,16 @@ namespace WindowsFormsApplication1
             // Enviamos al servidor el nombre tecleado
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
-
-            //Recibimos la respuesta del servidor
-            byte[] msg2 = new byte[80];
-            server.Receive(msg2);
-            mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-            MessageBox.Show(mensaje);
         }
 
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Creamos un IPEndPoint con el ip del servidor y puerto del servidor 
             //al que deseamos conectarnos
+            //IPAddress direc = IPAddress.Parse("147.83.117.22");
+            //IPEndPoint ipep = new IPEndPoint(direc, 50073);
             IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 9022);
+            IPEndPoint ipep = new IPEndPoint(direc, 9031);
 
 
             //Creamos el socket 
@@ -116,6 +150,11 @@ namespace WindowsFormsApplication1
                 return;
             }
 
+            ThreadStart ts = delegate { AtenderServidor(); };
+            atender = new Thread(ts);
+            atender.Start();
+
+
         }
 
         private void desconectarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,6 +166,9 @@ namespace WindowsFormsApplication1
             server.Send(msg);
 
             // Nos desconectamos
+
+            dataGridView1.Rows.Clear();
+            atender.Abort();
             this.BackColor = Color.Gray;
             server.Shutdown(SocketShutdown.Both);
             server.Close();
@@ -138,17 +180,6 @@ namespace WindowsFormsApplication1
             // Enviamos al servidor el nombre tecleado
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
-
-            //Recibimos la respuesta del servidor
-            byte[] msg2 = new byte[80];
-            server.Receive(msg2);
-            mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-            string[] word = mensaje.Split('/');
-            listBox1.Items.Clear();
-            foreach (string item in word)
-            {
-                listBox1.Items.Add(item);
-            }
         }
     }
 }
