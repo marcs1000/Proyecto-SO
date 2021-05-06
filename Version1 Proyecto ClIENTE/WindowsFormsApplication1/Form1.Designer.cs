@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.usuario = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -52,13 +53,16 @@
             this.conectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desconectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.Actualizar = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Invitar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.Juego.SuspendLayout();
             this.Registro.SuspendLayout();
             this.Conectar.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -287,8 +291,8 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.groupBox2.Controls.Add(this.listBox1);
-            this.groupBox2.Controls.Add(this.Actualizar);
+            this.groupBox2.Controls.Add(this.Invitar);
+            this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Location = new System.Drawing.Point(407, 294);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(525, 230);
@@ -296,24 +300,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de Conectados";
             // 
-            // Actualizar
+            // dataGridView1
             // 
-            this.Actualizar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Actualizar.Location = new System.Drawing.Point(15, 186);
-            this.Actualizar.Name = "Actualizar";
-            this.Actualizar.Size = new System.Drawing.Size(114, 29);
-            this.Actualizar.TabIndex = 1;
-            this.Actualizar.Text = "Actualizar";
-            this.Actualizar.UseVisualStyleBackColor = true;
-            this.Actualizar.Click += new System.EventHandler(this.Actualizar_Click);
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(15, 19);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(266, 190);
+            this.dataGridView1.TabIndex = 0;
             // 
-            // listBox1
+            // form1BindingSource
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(15, 19);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(485, 160);
-            this.listBox1.TabIndex = 2;
+            this.form1BindingSource.DataSource = typeof(WindowsFormsApplication1.Form1);
+            // 
+            // Invitar
+            // 
+            this.Invitar.Location = new System.Drawing.Point(297, 19);
+            this.Invitar.Name = "Invitar";
+            this.Invitar.Size = new System.Drawing.Size(123, 39);
+            this.Invitar.TabIndex = 1;
+            this.Invitar.Text = "Invitar";
+            this.Invitar.UseVisualStyleBackColor = true;
+            this.Invitar.Click += new System.EventHandler(this.Invitar_Click);
             // 
             // Form1
             // 
@@ -337,6 +345,8 @@
             this.Conectar.ResumeLayout(false);
             this.Conectar.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,8 +378,9 @@
         private System.Windows.Forms.ToolStripMenuItem conectarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem desconectarToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button Actualizar;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource form1BindingSource;
+        private System.Windows.Forms.Button Invitar;
     }
 }
 
