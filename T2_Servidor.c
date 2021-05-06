@@ -8,12 +8,8 @@
 #include <ctype.h>
 #include <mysql.h>
 #include <pthread.h>
-<<<<<<< HEAD:T2_Servidor.c
-#include  <my_global.h>
-=======
 #define MAX 100
 //#include <my_global.h>
->>>>>>> dev-v4:Servidor.c
 
 
 typedef struct {
@@ -33,10 +29,7 @@ typedef struct{
 	int num;
 }Partida;
 ListaConectados miLista;
-<<<<<<< HEAD:T2_Servidor.c
-=======
 
->>>>>>> dev-v4:Servidor.c
 int numsocket;
 int sockets[100];
 char misConectados [3000];
@@ -397,11 +390,7 @@ void *AtenderCliente (void *socket, int posicion){
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-<<<<<<< HEAD:T2_Servidor.c
-	conn = mysql_real_connect (conn, "shiva2.upc","root", "mysql", "T2_juego", 0, NULL, 0);
-=======
 	conn = mysql_real_connect (conn, "localhost","root", "mysql", "T2_juego", 0, NULL, 0);
->>>>>>> dev-v4:Servidor.c
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexi\uffc3\uffb3n: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
@@ -461,11 +450,7 @@ void *AtenderCliente (void *socket, int posicion){
 /*			pthread_mutex_lock (&mutex);*/
 			int log = LogIn(conn,respuesta,usuario,password,&miLista,sock_conn,notificacion, posicion);
 			if (log = 1)
-<<<<<<< HEAD:T2_Servidor.c
-				Pon (&miLista, usuario, socket);				
-=======
 				Pon (&miLista, usuario, sock_conn);				
->>>>>>> dev-v4:Servidor.c
 /*			pthread_mutex_unlock (&mutex);*/
 			
 		}
@@ -534,17 +519,6 @@ void *AtenderCliente (void *socket, int posicion){
 			}
 		}
 		
-<<<<<<< HEAD:T2_Servidor.c
-/*		else if (codigo ==6)*/
-/*		{ *///sign in
-			
-/*			char misConectados [300];*/
-/*			DameConectados (&miLista, misConectados);*/
-/*			sprintf (respuesta,misConectados);*/
-/*			write (sock_conn, respuesta, strlen(respuesta));*/
-					
-/*		}*/
-=======
 		else if (codigo ==7)
 		{ 
 			p = strtok( NULL, "/");
@@ -613,7 +587,6 @@ void *AtenderCliente (void *socket, int posicion){
 			}
 			
 		}
->>>>>>> dev-v4:Servidor.c
 		
 		if ((codigo !=0)&&(codigo !=6)&&(codigo !=7)&&(codigo !=8))
 		{
@@ -667,13 +640,8 @@ int main(int argc, char *argv[]){
 	//htonl formatea el numero que recibe al formato necesario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	// establecemos el puerto de escucha
-<<<<<<< HEAD:T2_Servidor.c
-	serv_adr.sin_port = htons(puerto);
-	/*serv_adr.sin_port = htons(9031);*/
-=======
 	/*serv_adr.sin_port = htons(puerto);*/
 	serv_adr.sin_port = htons(9026);
->>>>>>> dev-v4:Servidor.c
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -695,13 +663,8 @@ int main(int argc, char *argv[]){
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-<<<<<<< HEAD:T2_Servidor.c
-	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "T2_juego", 0, NULL, 0);
-	/*conn = mysql_real_connect (conn, "localhost","root", "mysql", "juego", 0, NULL, 0);*/
-=======
 	//*conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "T2_juego", 0, NULL, 0);*/
 	conn = mysql_real_connect (conn, "localhost", "root", "mysql", "T2_juego", 0, NULL, 0);
->>>>>>> dev-v4:Servidor.c
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexi\uffc3\uffb3n: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));

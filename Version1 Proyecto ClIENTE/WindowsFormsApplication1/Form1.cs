@@ -15,8 +15,6 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
 
-        delegate void DelegadoParaGrid(string[] mensaje, int codigo);
-
 
         Socket server;
         Thread atender;
@@ -28,47 +26,87 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
         }
 
 
-        private void AtenderServidor ()
+        private void AtenderServidor()
         {
             while (true)
             {
                 byte[] msg2 = new byte[200];
                 server.Receive(msg2);
-                string[] trozos = Encoding.ASCII.GetString(msg2).Split('/');
+                string mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];                
+                string[] trozos = mensaje.Split('/');
                 int codigo = Convert.ToInt32(trozos[0]);
-                string mensaje = trozos[1].Split('\0')[0];
 
 
                 switch (codigo)
                 {
                     case 1:
-                         MessageBox.Show(mensaje);
+                        MessageBox.Show(trozos[1]);
                         break;
 
                     case 2:
-                        MessageBox.Show(mensaje);
+                        MessageBox.Show(trozos[1]);
                         break;
 
                     case 4:
-                        MessageBox.Show(mensaje);
+                        MessageBox.Show(trozos[1]);
                         break;
 
                     case 5:
-                        MessageBox.Show(mensaje);
+                        MessageBox.Show(trozos[1]);
+                        break;
+
+                    case 7:
+                        string anfitrion = trozos[2];
+                        int partida7 = Convert.ToInt32(trozos[1]);
+                        string MessageBoxTitle = "Invitación de partida";
+                        string MessageBoxContent = anfitrion + " te ha retado a una partida\n Deseas aceptarla? ";
+                        string respuesta_invitation;
+                        DialogResult result = MessageBox.Show(MessageBoxContent, MessageBoxTitle, MessageBoxButtons.YesNo);
+                        switch (result)
+                        {
+                            case DialogResult.Yes:
+  
+                                respuesta_invitation = "8/" + anfitrion + "/" + partida7 + "/" + usuario.Text + "/" + Convert.ToString(result) + "/1";
+                                byte[] accept = System.Text.Encoding.ASCII.GetBytes(respuesta_invitation);
+                                server.Send(accept);
+                                break;
+                            case DialogResult.No:
+                                respuesta_invitation = "8/" + anfitrion + "/" + partida7 + "/" + usuario.Text + "/" + Convert.ToString(result) + "/0";
+                                byte[] decline = System.Text.Encoding.ASCII.GetBytes(respuesta_invitation);
+                                server.Send(decline);
+                                break;
+                        }
+                        
+                        break;
+
+                    case 8:
+                        int partida8 = Convert.ToInt32(trozos[1]);
+                        string invitado = trozos[2];
+                        string respuesta_inv = trozos[3];
+                        MessageBox.Show("Respuesta del invitado " + invitado + " a la partida " + partida8 + " del juego  es " + respuesta_inv);
+                        if (respuesta_inv == "Yes")
+                        {
+                            
+                        }
                         break;
 
                     case 999:
-                        int numcon999 = Convert.ToInt32(mensaje);
-                        dataGridView1.RowCount = numcon999;
-                        dataGridView1.ColumnCount = 1;
-                        for (int h = 2; h < trozos.Length;) // añadimos a los usuarios al datagridview
+                        int numcon999 = Convert.ToInt32(trozos[1]);
+                        if (numcon999 == 0)
+                            dataGridView1.Rows.Clear();
+                        else
                         {
-                            dataGridView1.Rows[h - 2].Cells[0].Value = trozos[h];
-                            h++;
+                            dataGridView1.RowCount = numcon999;
+                            dataGridView1.ColumnCount = 1;
+                            for (int h = 2; h < trozos.Length;) // añadimos a los usuarios al datagridview
+                            {
+                                dataGridView1.Rows[h - 2].Cells[0].Value = trozos[h];
+                                h++;
+                            }
                         }
                         break;
                 }
@@ -80,7 +118,7 @@ namespace WindowsFormsApplication1
 
         private void Form1_Close(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -129,9 +167,9 @@ namespace WindowsFormsApplication1
             //Creamos un IPEndPoint con el ip del servidor y puerto del servidor 
             //al que deseamos conectarnos
             //IPAddress direc = IPAddress.Parse("147.83.117.22");
-            //IPEndPoint ipep = new IPEndPoint(direc, 50073);
+            //IPEndPoint ipep = new IPEndPoint(direc, 50074);
             IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 9031);
+            IPEndPoint ipep = new IPEndPoint(direc, 9026);
 
 
             //Creamos el socket 
@@ -168,10 +206,23 @@ namespace WindowsFormsApplication1
             // Nos desconectamos
 
             dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Clear();
+            dataGridView1.DataSource = null;
             atender.Abort();
             this.BackColor = Color.Gray;
             server.Shutdown(SocketShutdown.Both);
             server.Close();
+        }
+
+        private void Invitar_Click(object sender, EventArgs e)
+        {
+
+            string invitacion_partida = dataGridView1.SelectedCells[0].Value.ToString();
+            string mensaje = "7/" + usuario.Text + "/" + invitacion_partida;
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+
+
         }
     }
 }
