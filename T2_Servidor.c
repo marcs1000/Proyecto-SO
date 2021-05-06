@@ -8,7 +8,12 @@
 #include <ctype.h>
 #include <mysql.h>
 #include <pthread.h>
+<<<<<<< HEAD:T2_Servidor.c
 #include  <my_global.h>
+=======
+#define MAX 100
+//#include <my_global.h>
+>>>>>>> dev-v4:Servidor.c
 
 
 typedef struct {
@@ -22,7 +27,16 @@ typedef struct {
 //meter las comsultas fuera del bucle del server
 int contador;
 
+typedef struct{
+	Conectado conectados[2];
+	int ID;
+	int num;
+}Partida;
 ListaConectados miLista;
+<<<<<<< HEAD:T2_Servidor.c
+=======
+
+>>>>>>> dev-v4:Servidor.c
 int numsocket;
 int sockets[100];
 char misConectados [3000];
@@ -30,8 +44,118 @@ char misConectados [3000];
 //Estructura necesaria para acceso excluyente
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
+int PonJugadorPartida (Partida *partida,char nombre[20],int socket)
+{
+	int encontrado=0;
+	int i=0;
+	if (partida->num==2)
+		return -1;
+	else
+	{
+		while (i<partida->num && encontrado==0 )
+		{
+			if (strcmp(partida->conectados[i].nombre,nombre)==0)
+			{
+				encontrado=1;
+				break;
+			}
+			i=i+1;
+		}
+		if (encontrado==0) {
+			printf("%s anadido correctamente en la partida %d\n",nombre,partida->ID);
+			strcpy(partida->conectados[partida->num].nombre,nombre);
+			partida->conectados[partida->num].socket=socket;
+			partida->num=partida->num+1;
+			printf("numero de jugadores en la partida %d = %d\n",partida->ID,partida->num);
+			return 0;
+		}
+		else
+			return -2;
+	}
+}
+
+int DameSocketJugadorPartida (Partida partida, char nombre[20]){
+	//Devuelve el socket o -1 si no esta en la lista
+	int i=0;
+	int encontrado=0;
+	while ((i< partida.num) && !encontrado)
+	{
+		if (strcmp(partida.conectados[i].nombre,nombre)==0)
+			encontrado =1;
+		if(!encontrado)
+			i=i+1;
+	}
+	if (encontrado)
+		return partida.conectados [i].socket;
+	else
+		return -1;
+}
+
+typedef Partida partidas[MAX];
+partidas misPartidas;
+
+void Inicializar_Tabla_Partidas(partidas Tabla)
+{
+	printf("Tabla inicializada correctamente\n");
+	int i;
+	for (i=0;i<100;i++)
+	{
+		Tabla[i].num=0;
+		
+	}
+}
+
+int PonPartida(partidas Tabla,Partida partida) //funcion para insertar una partida en la tabla de partidas; retorna 0 si la partida se puede a￯﾿ﾯ￯ﾾ﾿￯ﾾﾱadir correctamente, retorna -1 si no ha podido a￯﾿ﾯ￯ﾾ﾿￯ﾾﾱadir el 
+{
+	int encontrado;
+	int i=0;
+	while ((i<100) && !encontrado)
+	{
+		if (Tabla[i].num==0)
+		{
+			encontrado=1;
+		}
+		if (!encontrado)
+		{
+			i=i+1;
+		}
+	}
+	if (encontrado)
+	{
+		printf("Partida %d anadida correctamente en la tabla\n",partida.ID);
+		Tabla[i]=partida;
+		return 0;
+	}
+	else
+		return -1;
+}
+int DamePosicionPartidaID(partidas Tabla,int ID) // esta funcion busca una partida, DENTRO DE LA TABLA DE PARTIDAS, a partir de su ID QUE SE PASA COMO PARAMETRO
+{//retorna la posici￯﾿ﾳn o si no encuentra la partida retorna -1
+	int i=0;
+	int encontrado;
+	while (i<100)
+	{
+		if (Tabla[i].ID==ID)
+		{
+			encontrado=1;
+			break;
+		}
+		i=i+1;
+	}
+	if (encontrado)
+	{
+		return i;
+	}
+	else
+		return -1;
+	
+}
+
 int DameSocket (ListaConectados *lista, char usuario[20]){
 	//Devuelve el socket o -1 si no esta en la lista
+/*	printf("el usuario es: %s\n", usuario);*/
+/*	printf("Conectado 0: %s, %d\n", lista->conectados[0].nombre, lista->conectados[0].socket);*/
+/*	printf("Conectado 1: %s, %d\n", lista->conectados[1].nombre, lista->conectados[1].socket);*/
 	int i=0;
 	int encontrado=0;
 	while ((i< lista->num) && !encontrado)
@@ -42,7 +166,7 @@ int DameSocket (ListaConectados *lista, char usuario[20]){
 			i=i+1;
 	}
 	if (encontrado)
-		return lista->conectados [i].socket;
+		return lista->conectados[i].socket;
 	else
 		return -1;
 }
@@ -246,6 +370,7 @@ void *AtenderCliente (void *socket, int posicion){
 	int *s;
 	s= (int *) socket;
 	sock_conn= *s;
+	printf("se pone ne marcha el thret usando este socket: %d\n",sock_conn);
 	
 	//int socket_conn = * (int *) socket;
 	
@@ -253,6 +378,10 @@ void *AtenderCliente (void *socket, int posicion){
 	char respuesta[512];
 	char notificacion[1000];
 	int ret;
+	char anfitrion [20];
+	char invitado[20];
+	char invitacion[100];
+	int IDpartida = 1;
 	
 	MYSQL *conn;
 	int err;
@@ -268,7 +397,11 @@ void *AtenderCliente (void *socket, int posicion){
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
+<<<<<<< HEAD:T2_Servidor.c
 	conn = mysql_real_connect (conn, "shiva2.upc","root", "mysql", "T2_juego", 0, NULL, 0);
+=======
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", "T2_juego", 0, NULL, 0);
+>>>>>>> dev-v4:Servidor.c
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexi\uffc3\uffb3n: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
@@ -328,7 +461,11 @@ void *AtenderCliente (void *socket, int posicion){
 /*			pthread_mutex_lock (&mutex);*/
 			int log = LogIn(conn,respuesta,usuario,password,&miLista,sock_conn,notificacion, posicion);
 			if (log = 1)
+<<<<<<< HEAD:T2_Servidor.c
 				Pon (&miLista, usuario, socket);				
+=======
+				Pon (&miLista, usuario, sock_conn);				
+>>>>>>> dev-v4:Servidor.c
 /*			pthread_mutex_unlock (&mutex);*/
 			
 		}
@@ -397,6 +534,7 @@ void *AtenderCliente (void *socket, int posicion){
 			}
 		}
 		
+<<<<<<< HEAD:T2_Servidor.c
 /*		else if (codigo ==6)*/
 /*		{ *///sign in
 			
@@ -406,8 +544,78 @@ void *AtenderCliente (void *socket, int posicion){
 /*			write (sock_conn, respuesta, strlen(respuesta));*/
 					
 /*		}*/
+=======
+		else if (codigo ==7)
+		{ 
+			p = strtok( NULL, "/");
+			strcpy (anfitrion, p);
+			int pos=DamePosicion(&miLista,anfitrion);
+			Partida partida1;			
+			partida1.ID=IDpartida;
+			
+			int sockk=DameSocket(&miLista,anfitrion);
+			printf("%d\n",sockk);
+			int anadir_anfitrion= PonJugadorPartida(&partida1,anfitrion,sockk);
+			PonPartida(misPartidas,partida1);
+			p = strtok( NULL, "/");
+			while (p!=NULL)
+			{//enviamos las invitaciones
+				strcpy (invitado, p);
+				int socket_invitado=DameSocket(&miLista,invitado); 
+				printf("%d\n",socket_invitado);
+				if (socket_invitado==-1)
+				{//el jugador invitado ya no esta en la lista 
+					printf("El jugador %s se ha desconectado\n",invitado);
+				}
+				else
+				{
+					sprintf(invitacion,"7/%d/%s",IDpartida,anfitrion);
+					printf("invitacion : %s al jugador %s\n",anfitrion,invitado);
+					printf("%s\n",invitacion);
+					write (socket_invitado,invitacion, strlen(invitacion));
+	/*				sprintf(invitacion,"7/%d/%s",IDpartida,anfitrion);*/
+	/*				printf("invitacion : %s al jugador %s\n",anfitrion,invitado);*/
+	/*				write (j,invitacion, strlen(invitacion));*/
+				}
+				IDpartida+1;
+				p = strtok( NULL, "/");
+			}
+		}
 		
-		if ((codigo !=0)||(codigo !=6))
+		else if (codigo ==8)
+		{ 
+			char respuestaInv[100];
+			char respuestaAnfitrion[100];
+			char partidas_actuales[1000];
+			p = strtok( NULL, "/");
+			strcpy(anfitrion,p);
+			p = strtok( NULL, "/");
+			IDpartida= atoi(p);
+			int sock=DameSocket(&miLista,anfitrion);
+			p = strtok( NULL, "/");
+			strcpy (invitado, p);
+			p = strtok( NULL, "/");
+			strcpy(respuestaInv,p);
+			p = strtok( NULL, "/");
+			int res=atoi(p);
+			int pos_partida= DamePosicionPartidaID(misPartidas,IDpartida);
+			if (res==0)
+			{
+				printf("Jugador %s no acepta por lo tanto eliminado de la partida\n",invitado);
+			}
+			else
+			{
+				int pos_inv=DamePosicion(&miLista,invitado);
+				int ponA=PonJugadorPartida(&misPartidas[pos_partida],invitado,miLista.conectados[pos_inv].socket);
+				int sock_inv=DameSocketJugadorPartida(misPartidas[pos_partida],invitado);
+				sprintf(respuestaAnfitrion,"8/%d/%s/%s",IDpartida,invitado,respuestaInv);
+				write (sock,respuestaAnfitrion, strlen(respuestaAnfitrion));								
+			}
+			
+		}
+>>>>>>> dev-v4:Servidor.c
+		
+		if ((codigo !=0)&&(codigo !=6)&&(codigo !=7)&&(codigo !=8))
 		{
 			
 			printf ("Respuesta: %s\n", respuesta);
@@ -459,8 +667,13 @@ int main(int argc, char *argv[]){
 	//htonl formatea el numero que recibe al formato necesario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	// establecemos el puerto de escucha
+<<<<<<< HEAD:T2_Servidor.c
 	serv_adr.sin_port = htons(puerto);
 	/*serv_adr.sin_port = htons(9031);*/
+=======
+	/*serv_adr.sin_port = htons(puerto);*/
+	serv_adr.sin_port = htons(9026);
+>>>>>>> dev-v4:Servidor.c
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -482,8 +695,13 @@ int main(int argc, char *argv[]){
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
+<<<<<<< HEAD:T2_Servidor.c
 	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "T2_juego", 0, NULL, 0);
 	/*conn = mysql_real_connect (conn, "localhost","root", "mysql", "juego", 0, NULL, 0);*/
+=======
+	//*conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "T2_juego", 0, NULL, 0);*/
+	conn = mysql_real_connect (conn, "localhost", "root", "mysql", "T2_juego", 0, NULL, 0);
+>>>>>>> dev-v4:Servidor.c
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexi\uffc3\uffb3n: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
