@@ -53,9 +53,13 @@
             this.conectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desconectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Invitar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.Invitar = new System.Windows.Forms.Button();
+            this.chat = new System.Windows.Forms.RichTextBox();
+            this.escribir_chat = new System.Windows.Forms.TextBox();
+            this.Enviar_chat = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.Juego.SuspendLayout();
             this.Registro.SuspendLayout();
@@ -63,6 +67,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -270,7 +275,7 @@
             this.desconectarToolStripMenuItem});
             this.Conectar.Location = new System.Drawing.Point(0, 0);
             this.Conectar.Name = "Conectar";
-            this.Conectar.Size = new System.Drawing.Size(987, 24);
+            this.Conectar.Size = new System.Drawing.Size(1065, 24);
             this.Conectar.TabIndex = 9;
             this.Conectar.Text = "Conectar";
             // 
@@ -295,10 +300,20 @@
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Location = new System.Drawing.Point(407, 294);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(525, 230);
+            this.groupBox2.Size = new System.Drawing.Size(281, 230);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de Conectados";
+            // 
+            // Invitar
+            // 
+            this.Invitar.Location = new System.Drawing.Point(200, 19);
+            this.Invitar.Name = "Invitar";
+            this.Invitar.Size = new System.Drawing.Size(71, 39);
+            this.Invitar.TabIndex = 1;
+            this.Invitar.Text = "Invitar";
+            this.Invitar.UseVisualStyleBackColor = true;
+            this.Invitar.Click += new System.EventHandler(this.Invitar_Click);
             // 
             // dataGridView1
             // 
@@ -306,28 +321,58 @@
             this.dataGridView1.Location = new System.Drawing.Point(15, 19);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(266, 190);
+            this.dataGridView1.Size = new System.Drawing.Size(179, 190);
             this.dataGridView1.TabIndex = 0;
             // 
             // form1BindingSource
             // 
             this.form1BindingSource.DataSource = typeof(WindowsFormsApplication1.Form1);
             // 
-            // Invitar
+            // chat
             // 
-            this.Invitar.Location = new System.Drawing.Point(297, 19);
-            this.Invitar.Name = "Invitar";
-            this.Invitar.Size = new System.Drawing.Size(123, 39);
-            this.Invitar.TabIndex = 1;
-            this.Invitar.Text = "Invitar";
-            this.Invitar.UseVisualStyleBackColor = true;
-            this.Invitar.Click += new System.EventHandler(this.Invitar_Click);
+            this.chat.Location = new System.Drawing.Point(15, 30);
+            this.chat.Name = "chat";
+            this.chat.Size = new System.Drawing.Size(306, 378);
+            this.chat.TabIndex = 10;
+            this.chat.Text = "";
+            // 
+            // escribir_chat
+            // 
+            this.escribir_chat.Location = new System.Drawing.Point(15, 426);
+            this.escribir_chat.Name = "escribir_chat";
+            this.escribir_chat.Size = new System.Drawing.Size(199, 20);
+            this.escribir_chat.TabIndex = 11;
+            // 
+            // Enviar_chat
+            // 
+            this.Enviar_chat.Location = new System.Drawing.Point(242, 426);
+            this.Enviar_chat.Name = "Enviar_chat";
+            this.Enviar_chat.Size = new System.Drawing.Size(79, 22);
+            this.Enviar_chat.TabIndex = 12;
+            this.Enviar_chat.Text = "Enviar";
+            this.Enviar_chat.UseVisualStyleBackColor = true;
+            this.Enviar_chat.Click += new System.EventHandler(this.Enviar_chat_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.groupBox3.Controls.Add(this.Enviar_chat);
+            this.groupBox3.Controls.Add(this.chat);
+            this.groupBox3.Controls.Add(this.escribir_chat);
+            this.groupBox3.Location = new System.Drawing.Point(713, 45);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(340, 479);
+            this.groupBox3.TabIndex = 13;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Chat";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(987, 579);
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ClientSize = new System.Drawing.Size(1065, 579);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Registro);
             this.Controls.Add(this.Juego);
@@ -347,6 +392,8 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,6 +428,10 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource form1BindingSource;
         private System.Windows.Forms.Button Invitar;
+        private System.Windows.Forms.RichTextBox chat;
+        private System.Windows.Forms.TextBox escribir_chat;
+        private System.Windows.Forms.Button Enviar_chat;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 

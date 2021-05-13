@@ -14,14 +14,21 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-
-
+        private int partida;
+        string autor;
+        string mensaje_chat;
         Socket server;
         Thread atender;
+
+        delegate void DelegadoParaEnviarChatMain(int partida, string autor, string mensaje);
+        delegate void DelegadoListaConectados(int numcon999, string[] trozos);
+
+
+
         public Form1()
         {
             InitializeComponent();
-            CheckForIllegalCrossThreadCalls = false;
+            //CheckForIllegalCrossThreadCalls = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -29,6 +36,21 @@ namespace WindowsFormsApplication1
 
         }
 
+        public void PonerEnGrid(int numcon999, string[] trozos)
+        {
+            if (numcon999 == 0)
+                dataGridView1.Rows.Clear();
+            else
+            {
+                dataGridView1.RowCount = numcon999;
+                dataGridView1.ColumnCount = 1;
+                for (int h = 2; h < trozos.Length;) // añadimos a los usuarios al datagridview
+                {
+                    dataGridView1.Rows[h - 2].Cells[0].Value = trozos[h];
+                    h++;
+                }
+            }
+        }
 
         private void AtenderServidor()
         {
@@ -61,7 +83,7 @@ namespace WindowsFormsApplication1
 
                     case 7:
                         string anfitrion = trozos[2];
-                        int partida7 = Convert.ToInt32(trozos[1]);
+                        partida = Convert.ToInt32(trozos[1]);
                         string MessageBoxTitle = "Invitación de partida";
                         string MessageBoxContent = anfitrion + " te ha retado a una partida\n Deseas aceptarla? ";
                         string respuesta_invitation;
@@ -70,12 +92,12 @@ namespace WindowsFormsApplication1
                         {
                             case DialogResult.Yes:
   
-                                respuesta_invitation = "8/" + anfitrion + "/" + partida7 + "/" + usuario.Text + "/" + Convert.ToString(result) + "/1";
+                                respuesta_invitation = "8/" + anfitrion + "/" + partida + "/" + usuario.Text + "/" + Convert.ToString(result) + "/1";
                                 byte[] accept = System.Text.Encoding.ASCII.GetBytes(respuesta_invitation);
                                 server.Send(accept);
                                 break;
                             case DialogResult.No:
-                                respuesta_invitation = "8/" + anfitrion + "/" + partida7 + "/" + usuario.Text + "/" + Convert.ToString(result) + "/0";
+                                respuesta_invitation = "8/" + anfitrion + "/" + partida + "/" + usuario.Text + "/" + Convert.ToString(result) + "/0";
                                 byte[] decline = System.Text.Encoding.ASCII.GetBytes(respuesta_invitation);
                                 server.Send(decline);
                                 break;
@@ -84,30 +106,29 @@ namespace WindowsFormsApplication1
                         break;
 
                     case 8:
-                        int partida8 = Convert.ToInt32(trozos[1]);
+                        partida = Convert.ToInt32(trozos[1]);
                         string invitado = trozos[2];
                         string respuesta_inv = trozos[3];
-                        MessageBox.Show("Respuesta del invitado " + invitado + " a la partida " + partida8 + " del juego  es " + respuesta_inv);
+                        MessageBox.Show("Respuesta del invitado " + invitado + " a la partida " + partida + " del juego  es " + respuesta_inv);
                         if (respuesta_inv == "Yes")
                         {
                             
                         }
                         break;
 
+                    case 9:                       
+                        int partida9 = Convert.ToInt32(trozos[1]);
+                        autor = trozos[2];
+                        mensaje_chat = trozos[3];
+                        DelegadoParaEnviarChatMain delegado9 = new DelegadoParaEnviarChatMain(RecibirChat);
+                        this.Invoke(delegado9, new object[] { partida9, autor, mensaje_chat });
+                        break;
+
                     case 999:
+
                         int numcon999 = Convert.ToInt32(trozos[1]);
-                        if (numcon999 == 0)
-                            dataGridView1.Rows.Clear();
-                        else
-                        {
-                            dataGridView1.RowCount = numcon999;
-                            dataGridView1.ColumnCount = 1;
-                            for (int h = 2; h < trozos.Length;) // añadimos a los usuarios al datagridview
-                            {
-                                dataGridView1.Rows[h - 2].Cells[0].Value = trozos[h];
-                                h++;
-                            }
-                        }
+                        DelegadoListaConectados delegado999 = new DelegadoListaConectados(PonerEnGrid);
+                        dataGridView1.Invoke(delegado999, new object[] { numcon999, trozos });
                         break;
                 }
 
@@ -122,6 +143,7 @@ namespace WindowsFormsApplication1
 
         }
 
+        
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -167,9 +189,9 @@ namespace WindowsFormsApplication1
             //Creamos un IPEndPoint con el ip del servidor y puerto del servidor 
             //al que deseamos conectarnos
             //IPAddress direc = IPAddress.Parse("147.83.117.22");
-            //IPEndPoint ipep = new IPEndPoint(direc, 50074);
+            //IPEndPoint ipep = new IPEndPoint(direc, 50073);
             IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 9026);
+            IPEndPoint ipep = new IPEndPoint(direc, 9027);
 
 
             //Creamos el socket 
@@ -224,5 +246,26 @@ namespace WindowsFormsApplication1
 
 
         }
+
+        private void Enviar_chat_Click(object sender, EventArgs e)
+        {
+            int partida_enviada = partida;
+            string mensaje_chat = "9/" + partida_enviada + "/" + usuario.Text + "/" + escribir_chat.Text;
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje_chat);
+            server.Send(msg);
+        }
+
+        public void RecibirChat(int partida, string autor, string msg)
+        {
+            chat.SelectionFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
+            chat.SelectionColor = Color.Green;
+            chat.AppendText(autor);
+            chat.SelectionFont = new Font("Microsoft Sans Serif", 8);
+            chat.SelectionColor = Color.Black;
+            chat.AppendText(" :\n" + msg + "\r\n");
+            chat.ScrollToCaret();
+        }
+
+
     }
 }

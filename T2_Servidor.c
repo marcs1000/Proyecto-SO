@@ -9,7 +9,7 @@
 #include <mysql.h>
 #include <pthread.h>
 #define MAX 100
-//#include <my_global.h>
+/*#include <my_global.h>*/
 
 
 typedef struct {
@@ -390,6 +390,7 @@ void *AtenderCliente (void *socket, int posicion){
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
+	/*conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "T2_juego", 0, NULL, 0);*/
 	conn = mysql_real_connect (conn, "localhost","root", "mysql", "T2_juego", 0, NULL, 0);
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexi\uffc3\uffb3n: %u %s\n", 
@@ -588,7 +589,26 @@ void *AtenderCliente (void *socket, int posicion){
 			
 		}
 		
-		if ((codigo !=0)&&(codigo !=6)&&(codigo !=7)&&(codigo !=8))
+		else if (codigo==9)//peticion de enviar por el chat 
+		{
+			p = strtok( NULL, "/");
+			IDpartida= atoi(p);
+			p=strtok(NULL,"/");
+			char autor [20];
+			strcpy(autor,p);
+			p=strtok(NULL,"/");
+			char mensaje [20];
+			strcpy(mensaje,p);
+			sprintf(notificacion,"9/%d/%s/%s",IDpartida,autor,mensaje);
+			int pos= DamePosicionPartidaID(misPartidas,IDpartida);
+			for (int j=0;j<misPartidas[pos].num;j++)//se envia el mensaje del chat de una partida a todos los jugadores de esa partida
+			{
+				printf("Notificacion que envia el servidor: %s al socket:%d \n",notificacion,misPartidas[pos].conectados[j].socket);
+				write (misPartidas[pos].conectados[j].socket,notificacion,strlen(notificacion));
+			}
+		}
+		
+		if ((codigo !=0)&&(codigo !=6)&&(codigo !=7)&&(codigo !=8)&&(codigo !=9))
 		{
 			
 			printf ("Respuesta: %s\n", respuesta);
@@ -641,7 +661,7 @@ int main(int argc, char *argv[]){
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	// establecemos el puerto de escucha
 	/*serv_adr.sin_port = htons(puerto);*/
-	serv_adr.sin_port = htons(9026);
+	serv_adr.sin_port = htons(9027);
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -663,7 +683,7 @@ int main(int argc, char *argv[]){
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	//*conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "T2_juego", 0, NULL, 0);*/
+	/*conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "T2_juego", 0, NULL, 0);*/
 	conn = mysql_real_connect (conn, "localhost", "root", "mysql", "T2_juego", 0, NULL, 0);
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexi\uffc3\uffb3n: %u %s\n", 
