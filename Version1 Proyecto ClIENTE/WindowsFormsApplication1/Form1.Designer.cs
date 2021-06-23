@@ -36,10 +36,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.password = new System.Windows.Forms.TextBox();
             this.Juego = new System.Windows.Forms.GroupBox();
-            this.nombre_puntos = new System.Windows.Forms.TextBox();
-            this.nombre_partidasganadas = new System.Windows.Forms.TextBox();
-            this.puntos = new System.Windows.Forms.RadioButton();
-            this.partidasganadas = new System.Windows.Forms.RadioButton();
+            this.id_chat = new System.Windows.Forms.TextBox();
+            this.ParticipantesChat = new System.Windows.Forms.RadioButton();
+            this.chatsconcurrentes = new System.Windows.Forms.RadioButton();
             this.consultas = new System.Windows.Forms.Button();
             this.Registro = new System.Windows.Forms.GroupBox();
             this.Registrarse = new System.Windows.Forms.Button();
@@ -53,13 +52,16 @@
             this.conectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desconectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Eliminar_Chateadores = new System.Windows.Forms.Button();
+            this.chateador_5 = new System.Windows.Forms.RichTextBox();
+            this.chateador_4 = new System.Windows.Forms.RichTextBox();
+            this.chateador_3 = new System.Windows.Forms.RichTextBox();
+            this.chateador_2 = new System.Windows.Forms.RichTextBox();
+            this.chateador_1 = new System.Windows.Forms.RichTextBox();
+            this.AnadirChat = new System.Windows.Forms.Button();
             this.Invitar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.chat = new System.Windows.Forms.RichTextBox();
-            this.escribir_chat = new System.Windows.Forms.TextBox();
-            this.Enviar_chat = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.Juego.SuspendLayout();
             this.Registro.SuspendLayout();
@@ -67,7 +69,6 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -105,7 +106,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.usuario);
-            this.groupBox1.Location = new System.Drawing.Point(23, 45);
+            this.groupBox1.Location = new System.Drawing.Point(35, 60);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(333, 177);
             this.groupBox1.TabIndex = 6;
@@ -128,57 +129,50 @@
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(164, 20);
             this.password.TabIndex = 9;
+            this.password.UseSystemPasswordChar = true;
             // 
             // Juego
             // 
             this.Juego.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.Juego.Controls.Add(this.nombre_puntos);
-            this.Juego.Controls.Add(this.nombre_partidasganadas);
-            this.Juego.Controls.Add(this.puntos);
-            this.Juego.Controls.Add(this.partidasganadas);
+            this.Juego.Controls.Add(this.id_chat);
+            this.Juego.Controls.Add(this.ParticipantesChat);
+            this.Juego.Controls.Add(this.chatsconcurrentes);
             this.Juego.Controls.Add(this.consultas);
-            this.Juego.Location = new System.Drawing.Point(407, 45);
+            this.Juego.Location = new System.Drawing.Point(35, 60);
             this.Juego.Name = "Juego";
             this.Juego.Size = new System.Drawing.Size(281, 213);
             this.Juego.TabIndex = 7;
             this.Juego.TabStop = false;
             this.Juego.Text = "Consultas";
             // 
-            // nombre_puntos
+            // id_chat
             // 
-            this.nombre_puntos.Location = new System.Drawing.Point(71, 121);
-            this.nombre_puntos.Name = "nombre_puntos";
-            this.nombre_puntos.Size = new System.Drawing.Size(165, 20);
-            this.nombre_puntos.TabIndex = 4;
+            this.id_chat.Location = new System.Drawing.Point(71, 87);
+            this.id_chat.Name = "id_chat";
+            this.id_chat.Size = new System.Drawing.Size(165, 20);
+            this.id_chat.TabIndex = 4;
             // 
-            // nombre_partidasganadas
+            // ParticipantesChat
             // 
-            this.nombre_partidasganadas.Location = new System.Drawing.Point(71, 64);
-            this.nombre_partidasganadas.Name = "nombre_partidasganadas";
-            this.nombre_partidasganadas.Size = new System.Drawing.Size(165, 20);
-            this.nombre_partidasganadas.TabIndex = 3;
+            this.ParticipantesChat.AutoSize = true;
+            this.ParticipantesChat.Location = new System.Drawing.Point(54, 64);
+            this.ParticipantesChat.Name = "ParticipantesChat";
+            this.ParticipantesChat.Size = new System.Drawing.Size(222, 17);
+            this.ParticipantesChat.TabIndex = 2;
+            this.ParticipantesChat.TabStop = true;
+            this.ParticipantesChat.Text = "Numero de participantes en el chat de ID;";
+            this.ParticipantesChat.UseVisualStyleBackColor = true;
             // 
-            // puntos
+            // chatsconcurrentes
             // 
-            this.puntos.AutoSize = true;
-            this.puntos.Location = new System.Drawing.Point(54, 98);
-            this.puntos.Name = "puntos";
-            this.puntos.Size = new System.Drawing.Size(116, 17);
-            this.puntos.TabIndex = 2;
-            this.puntos.TabStop = true;
-            this.puntos.Text = "Puntos del jugador:";
-            this.puntos.UseVisualStyleBackColor = true;
-            // 
-            // partidasganadas
-            // 
-            this.partidasganadas.AutoSize = true;
-            this.partidasganadas.Location = new System.Drawing.Point(54, 41);
-            this.partidasganadas.Name = "partidasganadas";
-            this.partidasganadas.Size = new System.Drawing.Size(187, 17);
-            this.partidasganadas.TabIndex = 1;
-            this.partidasganadas.TabStop = true;
-            this.partidasganadas.Text = "ID de la ultima partida ganada por:";
-            this.partidasganadas.UseVisualStyleBackColor = true;
+            this.chatsconcurrentes.AutoSize = true;
+            this.chatsconcurrentes.Location = new System.Drawing.Point(54, 41);
+            this.chatsconcurrentes.Name = "chatsconcurrentes";
+            this.chatsconcurrentes.Size = new System.Drawing.Size(171, 17);
+            this.chatsconcurrentes.TabIndex = 1;
+            this.chatsconcurrentes.TabStop = true;
+            this.chatsconcurrentes.Text = "Numero de chats concurrentes";
+            this.chatsconcurrentes.UseVisualStyleBackColor = true;
             // 
             // consultas
             // 
@@ -200,7 +194,7 @@
             this.Registro.Controls.Add(this.label5);
             this.Registro.Controls.Add(this.label4);
             this.Registro.Controls.Add(this.label1);
-            this.Registro.Location = new System.Drawing.Point(23, 246);
+            this.Registro.Location = new System.Drawing.Point(35, 263);
             this.Registro.Name = "Registro";
             this.Registro.Size = new System.Drawing.Size(333, 278);
             this.Registro.TabIndex = 8;
@@ -275,7 +269,7 @@
             this.desconectarToolStripMenuItem});
             this.Conectar.Location = new System.Drawing.Point(0, 0);
             this.Conectar.Name = "Conectar";
-            this.Conectar.Size = new System.Drawing.Size(1065, 24);
+            this.Conectar.Size = new System.Drawing.Size(1003, 24);
             this.Conectar.TabIndex = 9;
             this.Conectar.Text = "Conectar";
             // 
@@ -296,22 +290,104 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.groupBox2.Controls.Add(this.Eliminar_Chateadores);
+            this.groupBox2.Controls.Add(this.chateador_5);
+            this.groupBox2.Controls.Add(this.chateador_4);
+            this.groupBox2.Controls.Add(this.chateador_3);
+            this.groupBox2.Controls.Add(this.chateador_2);
+            this.groupBox2.Controls.Add(this.chateador_1);
+            this.groupBox2.Controls.Add(this.AnadirChat);
             this.groupBox2.Controls.Add(this.Invitar);
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(407, 294);
+            this.groupBox2.Location = new System.Drawing.Point(472, 60);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(281, 230);
+            this.groupBox2.Size = new System.Drawing.Size(433, 479);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de Conectados";
             // 
+            // Eliminar_Chateadores
+            // 
+            this.Eliminar_Chateadores.Location = new System.Drawing.Point(226, 368);
+            this.Eliminar_Chateadores.Name = "Eliminar_Chateadores";
+            this.Eliminar_Chateadores.Size = new System.Drawing.Size(168, 29);
+            this.Eliminar_Chateadores.TabIndex = 8;
+            this.Eliminar_Chateadores.Text = "Eliminar usuarios";
+            this.Eliminar_Chateadores.UseVisualStyleBackColor = true;
+            this.Eliminar_Chateadores.Click += new System.EventHandler(this.Eliminar_Chateadores_Click);
+            // 
+            // chateador_5
+            // 
+            this.chateador_5.BackColor = System.Drawing.Color.Black;
+            this.chateador_5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chateador_5.ForeColor = System.Drawing.Color.White;
+            this.chateador_5.Location = new System.Drawing.Point(227, 323);
+            this.chateador_5.Name = "chateador_5";
+            this.chateador_5.Size = new System.Drawing.Size(168, 32);
+            this.chateador_5.TabIndex = 7;
+            this.chateador_5.Text = "";
+            // 
+            // chateador_4
+            // 
+            this.chateador_4.BackColor = System.Drawing.Color.Black;
+            this.chateador_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chateador_4.ForeColor = System.Drawing.Color.White;
+            this.chateador_4.Location = new System.Drawing.Point(227, 254);
+            this.chateador_4.Name = "chateador_4";
+            this.chateador_4.Size = new System.Drawing.Size(168, 32);
+            this.chateador_4.TabIndex = 6;
+            this.chateador_4.Text = "";
+            // 
+            // chateador_3
+            // 
+            this.chateador_3.BackColor = System.Drawing.Color.Black;
+            this.chateador_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chateador_3.ForeColor = System.Drawing.Color.White;
+            this.chateador_3.Location = new System.Drawing.Point(227, 181);
+            this.chateador_3.Name = "chateador_3";
+            this.chateador_3.Size = new System.Drawing.Size(168, 32);
+            this.chateador_3.TabIndex = 5;
+            this.chateador_3.Text = "";
+            // 
+            // chateador_2
+            // 
+            this.chateador_2.BackColor = System.Drawing.Color.Black;
+            this.chateador_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chateador_2.ForeColor = System.Drawing.Color.White;
+            this.chateador_2.Location = new System.Drawing.Point(227, 109);
+            this.chateador_2.Name = "chateador_2";
+            this.chateador_2.Size = new System.Drawing.Size(168, 32);
+            this.chateador_2.TabIndex = 4;
+            this.chateador_2.Text = "";
+            // 
+            // chateador_1
+            // 
+            this.chateador_1.BackColor = System.Drawing.Color.Black;
+            this.chateador_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chateador_1.ForeColor = System.Drawing.Color.White;
+            this.chateador_1.Location = new System.Drawing.Point(227, 42);
+            this.chateador_1.Name = "chateador_1";
+            this.chateador_1.Size = new System.Drawing.Size(168, 32);
+            this.chateador_1.TabIndex = 3;
+            this.chateador_1.Text = "";
+            // 
+            // AnadirChat
+            // 
+            this.AnadirChat.Location = new System.Drawing.Point(15, 423);
+            this.AnadirChat.Name = "AnadirChat";
+            this.AnadirChat.Size = new System.Drawing.Size(104, 39);
+            this.AnadirChat.TabIndex = 2;
+            this.AnadirChat.Text = "Añadir a Chat";
+            this.AnadirChat.UseVisualStyleBackColor = true;
+            this.AnadirChat.Click += new System.EventHandler(this.AnadirChat_Click);
+            // 
             // Invitar
             // 
-            this.Invitar.Location = new System.Drawing.Point(200, 19);
+            this.Invitar.Location = new System.Drawing.Point(226, 423);
             this.Invitar.Name = "Invitar";
-            this.Invitar.Size = new System.Drawing.Size(71, 39);
+            this.Invitar.Size = new System.Drawing.Size(168, 39);
             this.Invitar.TabIndex = 1;
-            this.Invitar.Text = "Invitar";
+            this.Invitar.Text = "Crear Chat";
             this.Invitar.UseVisualStyleBackColor = true;
             this.Invitar.Click += new System.EventHandler(this.Invitar_Click);
             // 
@@ -321,65 +397,26 @@
             this.dataGridView1.Location = new System.Drawing.Point(15, 19);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(179, 190);
+            this.dataGridView1.Size = new System.Drawing.Size(179, 388);
             this.dataGridView1.TabIndex = 0;
             // 
             // form1BindingSource
             // 
             this.form1BindingSource.DataSource = typeof(WindowsFormsApplication1.Form1);
             // 
-            // chat
-            // 
-            this.chat.Location = new System.Drawing.Point(15, 30);
-            this.chat.Name = "chat";
-            this.chat.Size = new System.Drawing.Size(306, 378);
-            this.chat.TabIndex = 10;
-            this.chat.Text = "";
-            // 
-            // escribir_chat
-            // 
-            this.escribir_chat.Location = new System.Drawing.Point(15, 426);
-            this.escribir_chat.Name = "escribir_chat";
-            this.escribir_chat.Size = new System.Drawing.Size(199, 20);
-            this.escribir_chat.TabIndex = 11;
-            // 
-            // Enviar_chat
-            // 
-            this.Enviar_chat.Location = new System.Drawing.Point(242, 426);
-            this.Enviar_chat.Name = "Enviar_chat";
-            this.Enviar_chat.Size = new System.Drawing.Size(79, 22);
-            this.Enviar_chat.TabIndex = 12;
-            this.Enviar_chat.Text = "Enviar";
-            this.Enviar_chat.UseVisualStyleBackColor = true;
-            this.Enviar_chat.Click += new System.EventHandler(this.Enviar_chat_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.groupBox3.Controls.Add(this.Enviar_chat);
-            this.groupBox3.Controls.Add(this.chat);
-            this.groupBox3.Controls.Add(this.escribir_chat);
-            this.groupBox3.Location = new System.Drawing.Point(713, 45);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(340, 479);
-            this.groupBox3.TabIndex = 13;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Chat";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1065, 579);
-            this.Controls.Add(this.groupBox3);
+            this.ClientSize = new System.Drawing.Size(1003, 610);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Registro);
             this.Controls.Add(this.Juego);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Conectar);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Pantalla Inicio";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -392,8 +429,6 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,10 +443,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.GroupBox Juego;
-        private System.Windows.Forms.TextBox nombre_puntos;
-        private System.Windows.Forms.TextBox nombre_partidasganadas;
-        private System.Windows.Forms.RadioButton puntos;
-        private System.Windows.Forms.RadioButton partidasganadas;
+        private System.Windows.Forms.TextBox id_chat;
+        private System.Windows.Forms.RadioButton ParticipantesChat;
+        private System.Windows.Forms.RadioButton chatsconcurrentes;
         private System.Windows.Forms.Button consultas;
         private System.Windows.Forms.GroupBox Registro;
         private System.Windows.Forms.TextBox repetirpassword;
@@ -428,10 +462,13 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource form1BindingSource;
         private System.Windows.Forms.Button Invitar;
-        private System.Windows.Forms.RichTextBox chat;
-        private System.Windows.Forms.TextBox escribir_chat;
-        private System.Windows.Forms.Button Enviar_chat;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button AnadirChat;
+        private System.Windows.Forms.RichTextBox chateador_1;
+        private System.Windows.Forms.RichTextBox chateador_5;
+        private System.Windows.Forms.RichTextBox chateador_4;
+        private System.Windows.Forms.RichTextBox chateador_3;
+        private System.Windows.Forms.RichTextBox chateador_2;
+        private System.Windows.Forms.Button Eliminar_Chateadores;
     }
 }
 
