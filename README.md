@@ -40,6 +40,8 @@ Version 5 verificada por Marc Serrano
 
 
 
-Version 6 generada por Arnau Millan
+Version Final generada por Arnau Millan
 
-Version 6 verificada por Marc Serrano
+Version Final verificada por Marc Serrano
+
+https://youtu.be/xxVlVYzFvtg
