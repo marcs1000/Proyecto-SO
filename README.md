@@ -41,3 +41,5 @@ Version 5 verificada por Marc Serrano
 
 
 Version 6 generada por Arnau Millan
+
+Version 6 verificada por Marc Serrano
